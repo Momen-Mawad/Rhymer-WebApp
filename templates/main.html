@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel= "stylesheet" type= "text/css" href= "static/style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+    <title>Rhymer Webapp</title>
+</head>
+<body>
+<center>
+        <form method=post enctype=multipart/form-data>
+          <label for="rhyme-word">Enter Word</label><br>
+          <input id="rhyme-word" type=text name=Rhyme-Word accept=".txt"><br>
+          <input type=file name=file accept=".txt">
+          <input id="submit" type=submit value=Upload>
+        </form>
+
+        <div id="lyrics">
+            {% for para in file %}
+                <p>{{para}}</p>
+            {% endfor %}
+        </div>
+</center>
+
+</body>
+
+</html>
