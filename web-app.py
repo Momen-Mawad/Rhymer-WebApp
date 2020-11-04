@@ -20,3 +20,4 @@ def upload_file():
 if __name__== "__main__":
     app.secret_key = '123456'
     app.run(debug='Enable', use_reloader=True)
+
