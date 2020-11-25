@@ -3,6 +3,8 @@ import psycopg2, pandas as pd
 try:
     connection = psycopg2.connect(user="postgres",
                                   password="126134",
+                                  host= "localhost",
+                                  port= "5432",
                                   database="Rhymer")
     cursor = connection.cursor()
     postgreSQL_select_Query = 'SELECT * FROM public."Sylvia Plath"'
