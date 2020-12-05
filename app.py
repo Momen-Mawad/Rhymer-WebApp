@@ -4,8 +4,7 @@ import pronouncing, pandas as pd
 
 df = pd.read_csv("static/data.csv").sort_values(by='syllables').reset_index(drop=True)
 df['usage'] = False
-x = df[:100]
-list(df.index)
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -31,6 +30,7 @@ def main():
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
     if request.method == 'POST':
+        global df
         df['usage'] = False
     return redirect(url_for('main'))
 
