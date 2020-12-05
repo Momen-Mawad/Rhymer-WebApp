@@ -1,73 +1,14 @@
-div.form
-{
-    display: block;
-    text-align: center;
-}
-form
-{
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-}
-
-div {
-    background-color: #f2f2f2;
-    padding: 12px 20px;
-
-}
-form.center {
-    margin-left: auto;
-    margin-right: auto;
-    width: 8em
-}
-
-input[type=text], select {
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=submit] {
-  background-color: #32a89d;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-.listblock ul li a {
-    padding: 5px 30px 5px 10px;
-    display: block;
-}
-
-.listblock ul li a:hover {
-    background: transparent url('../img/basket.png') no-repeat 3px 170px;
-}
-
-label.checkBox {
-    margin-left: 10px;
-}
-
-input[type="checkbox"]:checked + label {
-    color:green;
-}
-
 input[type=checkbox]
 {
+  /* Double-sized Checkboxes */
   -ms-transform: scale(2); /* IE */
   -moz-transform: scale(2); /* FF */
   -webkit-transform: scale(2); /* Safari and Chrome */
   -o-transform: scale(2); /* Opera */
-  transform: scale(2);
   padding: 10px;
+}
+
+.form-check-label
+{
+  padding-left: 15px;
 }
