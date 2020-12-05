@@ -16,7 +16,7 @@ div {
     padding: 12px 20px;
 
 }
-div.center {
+form.center {
     margin-left: auto;
     margin-right: auto;
     width: 8em
@@ -43,4 +43,31 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background-color: #45a049;
+}
+
+.listblock ul li a {
+    padding: 5px 30px 5px 10px;
+    display: block;
+}
+
+.listblock ul li a:hover {
+    background: transparent url('../img/basket.png') no-repeat 3px 170px;
+}
+
+label.checkBox {
+    margin-left: 10px;
+}
+
+input[type="checkbox"]:checked + label {
+    color:green;
+}
+
+input[type=checkbox]
+{
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
 }

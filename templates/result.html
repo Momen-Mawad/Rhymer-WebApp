@@ -11,29 +11,73 @@
     <title>Rhymer Webapp</title>
 </head>
 <body>
-    <div class="form center container" style="width: 400px;">
+    <div class="form center container" style="width: 450px;">
         <form method=post enctype=multipart/form-data>
-            <div class="row">
+            <div id="buttons" class="row">
                 <div class="col-sm">
                     <label for="rhyme-word">Enter Word</label><br>
                     <input id="rhyme-word" type=text name=Rhyme-Word accept=".txt" value="{{word}}">
                 </div>
                 <div class="col-sm">
-                    <label for="syllables-num">Syllables Number</label><br>
+                    <label for="syllables-num"></label><br>
                     <input id="syllables-num" type="number" name=syllables-num name=Rhyme-Word min="2" max="17" value="{{number}}">
                 </div>
                 <input id="submit" type=submit value=Search>
             </div>
+            <div id="syllables"></div>
+            <div id="list">
+                <ul id="df" style="list-style: none;">
+
+                </ul>
+            </div>
+        </form>
+        <form action="/reset" method="post">
+            <input id="reset" type=submit value=Reset>
         </form>
     </div>
-    <div class="center" style="width: 400px;">
-        <label>Syllables: {{number}}</label>
-        {% for key,value in file %}
-            <il>
-                {{value['poemName']}}<br />
-                <strong>{{value['text']}}</strong>
-            </il>
-        {% endfor %}
-    </div>
+
 </body>
 </html>
+
+<script>
+var syllablesNum = document.getElementById('syllables-num').value;
+var df1 = {{ dfJSON|tojson }};
+var df = JSON.parse(df1);
+
+$( document ).ready(function($) {
+    var syllablesNum = document.getElementById('syllables-num').value;
+    $("#syllables").html("Syllables: "+syllablesNum);
+    for (var i in df) {
+        var node = document.createElement('li');
+        node.setAttribute("class", "b"+df[i].syllables);
+        node.innerHTML = '<input type="checkbox" name="checklisthtml" id="'+i+'" value="'+i+'"><label name="'+i+'" class="checkBox">'+df[i].text+'</label>';
+        document.getElementById('df').appendChild(node);
+        console.log(df[i].usage)
+        if (df[i].usage == true) {
+            document.getElementById(i).checked = true;
+        }
+    }
+    var role = document.querySelectorAll('li');
+    for (var i in role) {
+        role[i].style.display = 'block'
+        if (role[i].getAttribute('class') == 'b'+syllablesNum) {
+            role[i].style.display = 'block';
+        } else {
+            role[i].style.display = 'none';
+        }
+    }
+});
+
+$('#syllables-num').on('keyup mouseup', function () {
+    var syllablesNum = document.getElementById('syllables-num').value;
+    $("#syllables").html("Syllables: "+syllablesNum);
+    var role = document.querySelectorAll('li');
+    for (var i in role) {
+        if (role[i].getAttribute('class') == 'b'+syllablesNum) {
+            role[i].style.display = 'block';
+        } else {
+            role[i].style.display = 'none';
+        }
+    }
+});
+</script>
