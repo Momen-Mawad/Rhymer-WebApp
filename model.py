@@ -1,4 +1,9 @@
-from app import db
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///static/data.db'
+db = SQLAlchemy(app)
 
 class lyricModel(db.Model):
     __tablename__ = 'lyrics'
@@ -10,3 +15,6 @@ class lyricModel(db.Model):
     text = db.Column(db.String)
     syllables = db.Column(db.String)
     usage = db.Column(db.Integer)
+
+
+

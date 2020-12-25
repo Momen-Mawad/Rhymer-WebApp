@@ -46,6 +46,7 @@
     </div>
 
 </body>
+{{x}}
 </html>
 
 <script>
@@ -63,7 +64,7 @@ $( document ).ready(function($) {
         node.innerHTML = '<input type="checkbox" name="checklisthtml" class="form-check-input" id="'+i+'" value="'+i+'"><label name="'+i+'" class="form-check-label">'+df[i].text+'</label>';
         document.getElementById('df').appendChild(node);
         console.log(df[i].usage)
-        if (df[i].usage == true) {
+        if (df[i].usage == 1) {
             document.getElementById(i).checked = true;
         }
     }
