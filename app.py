@@ -1,22 +1,20 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import render_template, request, url_for, redirect
 import pronouncing, pandas as pd
 from model import lyricModel, db, app
+from urllib.request import urlopen as uReq
 
 
-
+index = list(range(0,29444))
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
     if request.method == 'POST':
         checklist = request.form.getlist('checklisthtml')
+        page = False
         checklist = [int(x) for x in checklist]
         for i in checklist:
-            if request.form.get("checklisthtml", True):
-                x = lyricModel.query.filter_by(index=i).first()
-                x.usage = 1
-            elif request.form.get("checklisthtml", False):
-                x = lyricModel.query.filter_by(index=i).first()
-                x.usage = 0
+            x = lyricModel.query.filter_by(index=i).first()
+            x.usage = 1
         try:
             db.session.commit()
         except:
@@ -32,7 +30,7 @@ def main():
 
         numberSyllable = int(request.form.to_dict().get('syllables-num'))
         return render_template('result.html', number=str(numberSyllable),
-                               x=checklist, dfJSON=dfJSON, word=word)
+                               x=page, dfJSON=dfJSON, word=word)
 
     return render_template('main.html')
 
