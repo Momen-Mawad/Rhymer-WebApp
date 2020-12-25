@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request, url_for, redirect
-#from connect import df
-import pronouncing, pandas as pd
-
-df = pd.read_csv("static/data.csv").sort_values(by='syllables').reset_index(drop=True)
-df['usage'] = False
+import pronouncing
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///static/data.db'
+db = SQLAlchemy(app)
+
+from model import lyricModel
+
+lyricModel.query.all()
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
