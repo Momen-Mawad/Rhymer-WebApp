@@ -6,12 +6,13 @@ from urllib.request import urlopen as uReq
 
 index = list(range(0,29444))
 
+
 @app.route('/', methods=['GET', 'POST'])
 def main():
     if request.method == 'POST':
         checklist = request.form.getlist('checklisthtml')
         checklist = [int(x) for x in checklist]
-        checklist2 = []
+        checklist3 = request.form.get('checklisthtml2')
         for i in checklist:
             x = lyricModel.query.filter_by(index=i).first()
             x.usage = 1
@@ -29,7 +30,7 @@ def main():
         dfJSON = dfFiltered.to_json(orient='index')
 
         numberSyllable = int(request.form.to_dict().get('syllables-num'))
-        return render_template('result.html', number=str(numberSyllable), x=checklist, dfJSON=dfJSON, word=word)
+        return render_template('result.html', number=str(numberSyllable), x=checklist2, y=checklist3, dfJSON=dfJSON, word=word)
 
     return render_template('main.html')
 
