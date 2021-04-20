@@ -10,8 +10,8 @@ index = list(range(0,29444))
 def main():
     if request.method == 'POST':
         checklist = request.form.getlist('checklisthtml')
-        page = False
         checklist = [int(x) for x in checklist]
+        checklist2 = []
         for i in checklist:
             x = lyricModel.query.filter_by(index=i).first()
             x.usage = 1
@@ -19,7 +19,7 @@ def main():
             db.session.commit()
         except:
             pass
-
+        checklist2 = checklist
         dictionary = [u.__dict__ for u in db.session.query(lyricModel).all()]
         for i in dictionary:
             del i['_sa_instance_state']
@@ -29,8 +29,7 @@ def main():
         dfJSON = dfFiltered.to_json(orient='index')
 
         numberSyllable = int(request.form.to_dict().get('syllables-num'))
-        return render_template('result.html', number=str(numberSyllable),
-                               x=page, dfJSON=dfJSON, word=word)
+        return render_template('result.html', number=str(numberSyllable), x=checklist, dfJSON=dfJSON, word=word)
 
     return render_template('main.html')
 
