@@ -7,11 +7,11 @@ dictionary = [u.__dict__ for u in db.session.query(lyricModel).all()]
 for i in dictionary:
     del i['_sa_instance_state']
 df = pd.DataFrame(dictionary)
-df = df.sort_values(by=['text'])
+df = df.sort_values(by=['lyrics'])
 word = 'steel'
 #dfFiltered = df.loc[df['text'].str.split().str[-1].isin(pronouncing.rhymes(word))]
-dfFiltered = df.loc[df['text'].str.split().str[-1].isin(pronouncing.rhymes(word))]
-dfFiltered = dfFiltered.sort_values(by=['text'])
+dfFiltered = df.loc[df['lyrics'].str.split().str[-1].isin(pronouncing.rhymes(word))]
+dfFiltered = dfFiltered.sort_values(by=['lyrics'])
 
 index = list(range(0,29444))
 global checklist2
@@ -42,7 +42,7 @@ def main():
             del i['_sa_instance_state']
         df = pd.DataFrame(dictionary)
         word = request.form.get('Rhyme-Word')
-        dfFiltered = df.loc[df['text'].str.split().str[-1].isin(pronouncing.rhymes(word))]
+        dfFiltered = df.loc[df['lyrics'].str.split().str[-1].isin(pronouncing.rhymes(word))]
         dfJSON = dfFiltered.to_json(orient='index')
 
         numberSyllable = int(request.form.to_dict().get('syllables-num'))
