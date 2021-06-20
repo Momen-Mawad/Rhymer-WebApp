@@ -6,9 +6,16 @@ from model import lyricModel, db, app
 dictionary = [u.__dict__ for u in db.session.query(lyricModel).all()]
 for i in dictionary:
     del i['_sa_instance_state']
+
+x = 'hello (yes) - what do you need .... no.txt'
+
+with open(x, 'r', encoding='UTF-8'):
+    y = x.readlines()
+    print(y)
+
 df = pd.DataFrame(dictionary)
 df = df.sort_values(by=['lyrics'])
-word = 'steel'
+word = 'feel'
 #dfFiltered = df.loc[df['text'].str.split().str[-1].isin(pronouncing.rhymes(word))]
 dfFiltered = df.loc[df['lyrics'].str.split().str[-1].isin(pronouncing.rhymes(word))]
 dfFiltered = dfFiltered.sort_values(by=['lyrics'])
@@ -17,6 +24,8 @@ index = list(range(0,29444))
 global checklist2
 checklist2 = []
 i
+
+
 @app.route('/', methods=['GET', 'POST'])
 def main():
     if request.method == 'POST':
@@ -32,6 +41,7 @@ def main():
                 x.usage = 1
         try:
             db.session.commit()
+
         except:
             pass
         checklist2.extend(checklist)
