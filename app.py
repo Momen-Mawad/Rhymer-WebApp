@@ -7,23 +7,18 @@ dictionary = [u.__dict__ for u in db.session.query(lyricModel).all()]
 for i in dictionary:
     del i['_sa_instance_state']
 
-x = 'hello (yes) - what do you need .... no.txt'
-
-with open(x, 'r', encoding='UTF-8'):
-    y = x.readlines()
-    print(y)
-
 df = pd.DataFrame(dictionary)
 df = df.sort_values(by=['lyrics'])
 word = 'feel'
 #dfFiltered = df.loc[df['text'].str.split().str[-1].isin(pronouncing.rhymes(word))]
 dfFiltered = df.loc[df['lyrics'].str.split().str[-1].isin(pronouncing.rhymes(word))]
-dfFiltered = dfFiltered.sort_values(by=['lyrics'])
+dfFiltered = dfFiltered.sort_values(by=['singer'])
 
 index = list(range(0,29444))
 global checklist2
 checklist2 = []
-i
+x = lyricModel.query.filter_by(index=2).first()
+x.usage
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -31,19 +26,20 @@ def main():
     if request.method == 'POST':
         checklist = request.form.getlist('checklisthtml')
         checklist = [int(x) for x in checklist]
+        print(checklist)
         checklist3 = request.form.get('checklisthtml2')
-        if checklist != checklist3:
-            usage = lyricModel.query.filter_by(usage=1).all()
-            for i in usage:
-                i.usage = 0
-            for i in checklist:
-                x = lyricModel.query.filter_by(index=i).first()
-                x.usage = 1
         try:
+            if checklist != checklist3:
+                usage = lyricModel.query.filter_by(usage=1).all()
+                for i in usage:
+                    i.usage = 0
+                for i in checklist:
+                    x = lyricModel.query.filter_by(index=i).first()
+                    x.usage = 1
             db.session.commit()
-
         except:
             pass
+
         checklist2.extend(checklist)
         checklist22 = set(checklist2)
         checklist22 = list(checklist22)

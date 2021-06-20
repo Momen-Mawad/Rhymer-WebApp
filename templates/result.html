@@ -35,7 +35,7 @@
                     <ul id="df" class="list-group list-group-flush">
                     </ul>
                 </div>
-                <input type=text name=checklisthtml2 accept=".txt" value="{{checklist2}}">
+                <input type=text name=checklisthtml2 accept=".txt" value="{{checklist2}}" hidden>
             </form>
         </div>
 
@@ -46,7 +46,6 @@
         </form>
     </div>
     <p name="checklisthtml3">
-        {{checklist3}}
     </p>
 </body>
 </html>
@@ -60,10 +59,11 @@ $( document ).ready(function($) {
     var syllablesNum = document.getElementById('syllables-num').value;
     $("#syllables").html("Syllables: "+syllablesNum);
     for (var i in df) {
+        console.log(df[i].lyrics)
         var node = document.createElement('li');
         node.setAttribute("name", "b"+df[i].syllables);
         node.setAttribute("class", "list-group-item")
-        node.innerHTML = '<input type="checkbox" name="checklisthtml" class="form-check-input" id="'+i+'" value="'+i+'"><label name="'+i+'" class="form-check-label">'+df[i].text+'</label>';
+        node.innerHTML = '<input type="checkbox" name="checklisthtml" class="form-check-input" id="'+i+'" value="'+i+'"><label name="'+i+'" class="form-check-label">'+df[i].lyrics+'</label>';
         document.getElementById('df').appendChild(node);
         console.log(df[i].usage)
         if (df[i].usage == 1) {
